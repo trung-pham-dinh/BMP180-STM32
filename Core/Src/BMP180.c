@@ -16,7 +16,7 @@ static I2C_HandleTypeDef* hi2c;
 
 static uint32_t delay;
 
-void BMP180_timer_run() { // call in timer interrupt
+void BMP180_timer_run() { // call in timer interrupt (use this function in case your library does not have delay function)
 	if(delay) {
 		delay--;
 	}
@@ -93,7 +93,8 @@ uint8_t BMP180_startTemp() {
 	data[0] = BMP180_CTRL_REG;
 	data[1] = BMP180_TEMP_CMD;
 	if(BMP180_writeBytes(data, 2)) {
-		BMP180_delay(5);
+		HAL_Delay(5);
+//		BMP180_delay(5);
 		return 1;
 	}
 	return 0;
@@ -125,7 +126,8 @@ uint8_t BMP180_startPressure(uint8_t oversampling) {
 			break;
 	}
 	if(BMP180_writeBytes(data, 2)) {
-		BMP180_delay(delay);
+		HAL_Delay(delay);
+//		BMP180_delay(delay);
 		return 1;
 	}
 	return 0;

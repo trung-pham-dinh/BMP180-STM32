@@ -111,7 +111,7 @@ int main(void)
 	  BMP180_getTemp(&temp);
 	  BMP180_startPressure(0);
 	  BMP180_getPressure(&pressure, 0);
-	  BMP180_delay(1000);
+	  HAL_Delay(1000);
 	  HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
 /*	// this order will generate error
 	  BMP180_startTemp();
